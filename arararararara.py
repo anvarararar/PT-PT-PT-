@@ -109,3 +109,30 @@ def SHIM ()
   p.stop()
   GPIO.cleanup()
 SHIM()
+
+
+import RPi.GPIO as GPIO
+import time
+GPIO.setmode(GPIO.BCM)
+pins = [10, 9, 11, 5, 6, 13, 19, 26]
+
+
+print("Введите число (-1 для выхода)")
+
+value = int(input())
+    
+
+def num2dac(value):
+    mass = [0, 0, 0, 0, 0, 0, 0, 0]
+    for i in range(8):
+        if (value % 2 == 1):
+            mass[7-i] = 1
+        value //= 2
+    return mass
+def lightNumber(number):
+    GPIO.setup (pins, GPIO.OUT)
+    mass = num2dac(number)[::-1]
+    GPIO.output(pins, mass)
+    time.sleep(1)
+
+lightNumber(value)
