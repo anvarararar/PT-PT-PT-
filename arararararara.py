@@ -74,15 +74,38 @@ def lightNumber(number):
 
 lightNumber(0)
 
-# def runningPattern (pattern, direction):
-#     GPIO.setup (pins, GPIO.OUT)
-#     for i in range ()
-#     lightNumber(pattern)
-#     if direction == 0:
-#         pattern = pattern << 1
-#     if direction == 1:
-#         pattern = pattern >> 1
-#     lightNumber(pattern)
+def runningPattern (pattern, direction):
+    GPIO.setup (pins, GPIO.OUT)
+    for i in range ()
+    lightNumber(pattern)
+    if direction == 0:
+        first = pattern // 128
+        pattern = pattern << 1
+        pattern = (pattern % 256) + first 
+    if direction == 1:
+        last = pattern % 2
+        pattern = pattern >> 1
+        pattern = (pattern // 256) + (last * 128) 
+    lightNumber(pattern)
 
-# runningPattern (3, 1)
+runningPattern (3, 1)
 
+def SHIM ()
+  GPIO.setmode(GPIO.BOARD)
+  GPIO.setup(12, GPIO.OUT)
+
+  p = GPIO.PWM(12, 50)  
+  p.start(0)
+  try:
+    while 1:
+        for dc in range(0, 101, 5):
+            p.ChangeDutyCycle(dc)
+            time.sleep(0.1)
+        for dc in range(100, -1, -5):
+            p.ChangeDutyCycle(dc)
+            time.sleep(0.1)
+  except KeyboardInterrupt:
+      pass
+  p.stop()
+  GPIO.cleanup()
+SHIM()
