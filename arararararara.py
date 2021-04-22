@@ -136,3 +136,40 @@ def lightNumber(number):
     time.sleep(1)
 
 lightNumber(value)
+
+
+import numpy as np
+import script1 as sc1
+
+print ("Введите число повторений")
+
+repetitionsNumber = int(input())
+
+for i in range(repetitionsNumber):
+    for j in range(256):
+        sc1.num2dac(j)
+        sc1.lightNumber(j)
+
+    for j in range(255):
+        sc1.num2dac(255 - j)
+        sc1.lightNumber(255-j)
+        
+        import numpy as np
+import matplotlib.pyplot as plt
+
+print("Введите 3 числа (time, frequency, samplingFrequency)")
+
+time = int(input())
+frequency = int(input())
+samplingFrequency = int(input())
+
+X = np.arange(0, time, 1 / samplingFrequency)
+
+ndarray = list(map(int, 127.5 * (np.sin(2 * np.pi * X * frequency) +1)))
+plt.figure(figsize = (13, 13))
+
+plt.plot(X, ndarray)
+
+plt.savefig("/home/student/Desktop/New/graph.png")
+
+print (X,ndarray)
